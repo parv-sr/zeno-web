@@ -58,4 +58,4 @@ def claim_booking(request, booking_id):
     if request.user.teacherprofile.subjects.filter(id=booking.subject.id).exists() and not booking.claimed_by:
         booking.claimed_by = request.user
         booking.save()
-    return redirect('dashboard')
+    return redirect('teacher_dashboard')
