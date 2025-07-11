@@ -1,33 +1,78 @@
-<!-- templates/home.html -->
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Welcome to Zeno Learning{% endblock %}
+{% block title %}Home | Zeno Classes{% endblock %}
 
 {% block content %}
-<section class="text-center py-20 bg-white">
-    <h2 class="text-4xl font-bold text-blue-600 mb-4">Empowering Students Through Personalized Tutoring</h2>
-    <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-        At Zeno, we connect eager learners with experienced teachers across Cambridge subjects. Book a class and start your journey today.
-    </p>
-    <a href="/book/" class="inline-block bg-blue-600 text-white font-medium px-6 py-3 rounded-md hover:bg-blue-700 transition">
-        Book a Class
-    </a>
-</section>
 
-<section class="py-16 bg-gray-100">
-    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-8 text-center">
-        <div>
-            <h3 class="text-2xl font-semibold text-gray-800">Expert Faculty</h3>
-            <p class="mt-2 text-gray-600">Trained teachers with subject specialization and Cambridge experience.</p>
-        </div>
-        <div>
-            <h3 class="text-2xl font-semibold text-gray-800">Flexible Scheduling</h3>
-            <p class="mt-2 text-gray-600">Choose your preferred date, time, and subject for each session.</p>
-        </div>
-        <div>
-            <h3 class="text-2xl font-semibold text-gray-800">Seamless Booking</h3>
-            <p class="mt-2 text-gray-600">Simple online form that connects you to teachers instantly.</p>
-        </div>
+<!-- Hero Carousel -->
+<div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'img/hero1.png' %}" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block bg-white bg-opacity-75 rounded p-3">
+        <h2 class="text-primary fw-bold">Personalised Learning, Real Results</h2>
+        <p class="text-secondary">One-on-one classes tailored to your child’s needs.</p>
+      </div>
     </div>
-</section>
+    <div class="carousel-item">
+      <img src="{% static 'img/hero2.png' %}" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block bg-white bg-opacity-75 rounded p-3">
+        <h2 class="text-primary fw-bold">Expert Tutors. Every Time.</h2>
+        <p class="text-secondary">Only the best teachers, verified and experienced.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'img/hero3.png' %}" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block bg-white bg-opacity-75 rounded p-3">
+        <h2 class="text-primary fw-bold">Seamless Booking. Immediate Support.</h2>
+        <p class="text-secondary">Book your slot in under a minute.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Why Choose Us -->
+<div class="container my-5">
+  <h3 class="text-center fw-bold mb-4" style="color: #03BBD0;">Why Zeno Classes?</h3>
+  <div class="row g-4">
+    <div class="col-md-4 text-center">
+      <div class="p-4 border rounded shadow-sm h-100">
+        <h5 class="text-primary">🎓 Experienced Faculty</h5>
+        <p>Every teacher is carefully vetted for subject expertise and teaching excellence.</p>
+      </div>
+    </div>
+    <div class="col-md-4 text-center">
+      <div class="p-4 border rounded shadow-sm h-100">
+        <h5 class="text-primary">📅 Flexible Scheduling</h5>
+        <p>Book lessons that fit your routine — even last minute!</p>
+      </div>
+    </div>
+    <div class="col-md-4 text-center">
+      <div class="p-4 border rounded shadow-sm h-100">
+        <h5 class="text-primary">💡 Personalized Support</h5>
+        <p>We're just a message away — whether it’s a math doubt or a booking issue.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Call to Action -->
+<div class="bg-light py-5 text-center">
+  <h4 class="fw-bold mb-3" style="color: #6194E8;">Ready to Start Learning?</h4>
+  <a href="{% url 'book_class' %}" class="btn btn-lg text-white px-4" style="background-color: #03BBD0; border-radius: 30px;">
+    Book a Class Now!
+  </a>
+</div>
+
+<!-- Contact Section -->
+<div class="container text-center py-5">
+  <h5 class="mb-3 fw-semibold">📞 Contact Us</h5>
+  <p class="mb-1"><strong>Phone:</strong> +91 98765 43210</p>
+  <p><strong>Email:</strong> contact@zenoclasses.in</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
 {% endblock %}

@@ -9,3 +9,4 @@ class TeacherProfile(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {'Teacher' if self.is_teacher else 'Not a Teacher'}"
+

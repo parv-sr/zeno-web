@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Meet Our Tutors{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="text-center fw-bold text-primary mb-4">Meet Our Tutors</h2>
+
+    <!-- Subject Filter Dropdown -->
+    <form method="get" class="d-flex justify-content-center mb-5">
+        <select name="subject" class="form-select w-auto me-3">
+            <option value="">All Subjects</option>
+            {% for subject in subjects %}
+                <option value="{{ subject.id }}" {% if selected_subject == subject.id %}selected{% endif %}>
+                    {{ subject.name }}
+                </option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-outline-primary">Filter</button>
+    </form>
+
+    <!-- Tutor Grid -->
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        {% for tutor in tutors %}
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0 bg-white">
+                    <div class="card-img-top d-flex justify-content-center align-items-center bg-light" style="height: 240px; overflow: hidden;">
+                        <img src="{% static 'img/default_avatar.png' %}" alt="Tutor photo" class="img-fluid" style="max-height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-semibold text-primary">{{ tutor.user.get_full_name|default:tutor.user.username }}</h5>
+                        <p class="card-text text-muted small">
+                            {% for subject in tutor.subjects.all %}
+                                {{ subject.name }}{% if not forloop.last %}, {% endif %}
+                            {% empty %}
+                                No subject assigned
+                            {% endfor %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-center text-muted">No tutors found for this subject.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

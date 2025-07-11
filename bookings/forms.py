@@ -1,5 +1,5 @@
 from django import forms
-from .models import Booking
+from .models import Booking, Feedback
 from datetime import date
 
 class BookingForm(forms.ModelForm):
@@ -26,3 +26,11 @@ class BookingForm(forms.ModelForm):
         if preferred_date < date.today():
             raise forms.ValidationError("You cannot select a past date.")
         return preferred_date
+    
+class FeedbackForm(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        fields = ['name', 'email', 'message']
+        widgets = {
+            'message': forms.Textarea(attrs={'rows':4})
+        }

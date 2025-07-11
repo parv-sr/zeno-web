@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Feedback Received{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="bg-white border border-success-subtle rounded-4 shadow p-5 text-center" style="max-width: 600px;">
+        <h2 class="text-success fw-bold mb-3">Thank You!</h2>
+        <p class="text-muted fs-5">
+            We’ve received your feedback and truly appreciate your input. Your thoughts help us grow better every day.
+        </p>
+        <a href="{% url 'home' %}" class="btn btn-outline-primary mt-4 px-4 py-2 rounded-pill">
+            Back to Home
+        </a>
+    </div>
+</div>
+{% endblock %}

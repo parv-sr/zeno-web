@@ -1,10 +1,40 @@
-<nav class="bg-white border-b shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-        <h1 class="text-xl font-semibold text-blue-600">Zeno Learning</h1>
-        <div>
-            <a href="{% url 'home' %}" class="text-gray-600 hover:text-blue-600 mr-4">Home</a>
-            <a href="/book/" class="text-gray-600 hover:text-blue-600">Book a Class</a>
-            <a href="{% url 'teacher_login' %}" class="btn btn-outline-light btn-sm ms-2">Teacher Login</a>
+{% load static %}
+
+<header class="bg-white shadow-sm py-3">
+  <div class="container-fluid px-5">
+    <div class="row align-items-center justify-content-between">
+      
+      <div class="col-md-4 d-flex align-items-center">
+        <img src="{% static 'img/logo.png' %}" alt="Logo" style="height: 50px;">
+        <div class="border-start ps-3 ms-3">
+          <div class="fw-bold" style="font-size: 18px;">Tutoring</div>
+          <div class="text-muted" style="font-size: 15px;">Made Easy</div>
         </div>
+      </div>
+
+      <div class="col-md-8 d-flex justify-content-end">
+        <div class="rounded-pill d-flex align-items-center px-2 py-1" style="background-color: #d4f7fb;">
+          <a href="{% url 'book_class' %}" class="btn text-white fw-bold px-4 py-2 rounded-pill me-2" style="background-color: #00c6dc;">Book Now</a>
+          <a href="{% url 'home' %}" class="btn fw-semibold text-dark px-3 py-2 rounded-pill link-no-decoration">Home</a>
+          <a href="{% url 'tutors' %}" class="btn fw-semibold text-dark px-3 py-2 rounded-pill link-no-decoration">Tutors</a>
+          <a href="{% url 'feedback' %}" class="btn fw-semibold text-dark px-3 py-2 rounded-pill link-no-decoration">Give Feedback</a>
+          <a href="{% url 'teacher_login' %}" class="btn fw-semibold text-dark px-3 py-2 rounded-pill link-no-decoration">Teacher Login</a>
+        </div>
+      </div>
+
     </div>
-</nav>
+  </div>
+</header>
+
+<style>
+  .link-no-decoration {
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .link-no-decoration:hover {
+    background-color: #c9f3f9;
+    box-shadow: 0 4px 10px rgba(0, 198, 220, 0.2);
+    transform: scale(1.03);
+  }
+</style>

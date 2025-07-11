@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from bookings.models import Booking, BookingClaimLog
 from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404, redirect
+from .models import TeacherProfile
+from bookings.models import Subject
 
 def teacher_login(request):
     if request.method == 'POST':
@@ -64,3 +66,17 @@ def claim_booking(request, booking_id):
     )
     return redirect('teacher_dashboard')
 
+def tutor_list(request):
+    subject_id = request.GET.get('subject')
+    subjects = Subject.objects.all()
+
+    if subject_id:
+        tutors = TeacherProfile.objects.filter(subject__id=subject_id)
+    else:
+        tutors = TeacherProfile.objects.all()
+
+    return render(request, 'users/tutors.html', {
+        'tutors': tutors,
+        'subjects': subjects,
+        'selected_subject': int(subject_id) if subject_id else None,
+    })
