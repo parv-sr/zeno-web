@@ -1,0 +1,33 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block title %}Welcome to Zeno Learning{% endblock %}
+
+{% block content %}
+<section class="text-center py-20 bg-white">
+    <h2 class="text-4xl font-bold text-blue-600 mb-4">Empowering Students Through Personalized Tutoring</h2>
+    <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+        At Zeno, we connect eager learners with experienced teachers across Cambridge subjects. Book a class and start your journey today.
+    </p>
+    <a href="/book/" class="inline-block bg-blue-600 text-white font-medium px-6 py-3 rounded-md hover:bg-blue-700 transition">
+        Book a Class
+    </a>
+</section>
+
+<section class="py-16 bg-gray-100">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-8 text-center">
+        <div>
+            <h3 class="text-2xl font-semibold text-gray-800">Expert Faculty</h3>
+            <p class="mt-2 text-gray-600">Trained teachers with subject specialization and Cambridge experience.</p>
+        </div>
+        <div>
+            <h3 class="text-2xl font-semibold text-gray-800">Flexible Scheduling</h3>
+            <p class="mt-2 text-gray-600">Choose your preferred date, time, and subject for each session.</p>
+        </div>
+        <div>
+            <h3 class="text-2xl font-semibold text-gray-800">Seamless Booking</h3>
+            <p class="mt-2 text-gray-600">Simple online form that connects you to teachers instantly.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

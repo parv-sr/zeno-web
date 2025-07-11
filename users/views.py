@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from bookings.models import Booking
+from bookings.models import Booking, BookingClaimLog
 from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404, redirect
 
@@ -58,4 +58,9 @@ def claim_booking(request, booking_id):
     if request.user.teacherprofile.subjects.filter(id=booking.subject.id).exists() and not booking.claimed_by:
         booking.claimed_by = request.user
         booking.save()
+    BookingClaimLog.objects.create(
+        booking=booking,
+        claimed_by = request.user
+    )
     return redirect('teacher_dashboard')
+

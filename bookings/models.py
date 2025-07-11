@@ -23,4 +23,10 @@ class Booking(models.Model):
         return f"{self.full_name} - {self.subject} on {self.preferred_date}"
 
 
+class BookingClaimLog(models.Model):
+    booking = models.ForeignKey('Booking', on_delete=models.CASCADE)
+    claimed_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    claimed_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"{self.claimed_by.username} claimed {self.booking} on {self.claimed_at}"

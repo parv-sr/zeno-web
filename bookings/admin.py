@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Booking, Subject
+from .models import Booking, Subject, BookingClaimLog
 
 
 @admin.register(Booking)
@@ -23,3 +23,8 @@ class BookingAdmin(admin.ModelAdmin):
 class SubjectAdmin(admin.ModelAdmin):
     list_display = ('name',)
     search_fields = ('name',)
+
+@admin.register(BookingClaimLog)
+class BookingClaimLogAdmin(admin.ModelAdmin):
+    list_display = ('booking', 'claimed_by', 'claimed_at')
+    list_filter = ('claimed_by', 'claimed_at')

@@ -57,7 +57,9 @@ ROOT_URLCONF = 'zeno_web.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'users' / 'templates'],
+        'DIRS': [BASE_DIR / 'users' / 'templates',
+                 BASE_DIR / 'templates',
+                 ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,11 +80,11 @@ WSGI_APPLICATION = 'zeno_web.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'zeno_db',
-        'USER': 'zenoadmin',
-        'PASSWORD': 'zenoadmin@2025',
-        'HOST': 'localhost',
-        'PORT': '5432'
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
     }
 }
 
