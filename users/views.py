@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404, redirect
 from .models import TeacherProfile
 from bookings.models import Subject
 from django.http import JsonResponse
+from datetime import date
 
 def teacher_login(request):
     if request.method == 'POST':
@@ -83,26 +84,53 @@ def tutor_list(request):
     })
 
 
+SUBJECT_COLOR_MAP = {
+    'Math (inclusive of mechanics, pure math and statistics) (8-12)': '#4C5FD5',
+    'Computer science (9-12)': '#00BFA6',
+    'Business (9-12)': '#F57C00',
+    'IGCSE EFL and FLE (9-10)': '#8E24AA',
+    'General English (AS/A)': '#5E35B1',
+    'Environmental science (9-12)': '#43A047',
+    'EGP': '#1E88E5',
+    'Biology (8-12)': '#43A047',
+    'Economics (9-12)': '#F9A825',
+    'Chemistry (8-12)': '#E53935',
+    'Physics (8-12)': '#3949AB',
+    'ICT (9-12)': '#6D4C41',
+    'Accountancy (9-12)': '#FF7043',
+    'Psychology (11-12)': '#D81B60',
+    'IPQ (11-12)': '#0097A7',
+    'Sociology (9-12)': '#7E57C2',
+}
+
+
 @login_required
 def teacher_calendar_events(request):
     teacher_subjects = request.user.teacherprofile.subjects.all()
 
+    today = date.today()
     events = []
     bookings = Booking.objects.filter(subject__in=teacher_subjects)
 
     for booking in bookings:
+        is_past = booking.preferred_date < today
+
+        base_color = SUBJECT_COLOR_MAP.get(str(booking.subject), '#03BBD0')
+        color = '#e0e0e0' if is_past else base_color
+
         events.append({
             'id': booking.id,
             'title': f"{booking.full_name}",
             'start': str(booking.preferred_date),
-            'backgroundColor': '#6194E8' if booking.claimed_by else '#03BBD0',
-            'borderColor': '#03BBD0' if not booking.claimed_by else '#6194E8',
+            'backgroundColor': color,
+            'borderColor': color,
             'extendedProps': {
                 'subject': str(booking.subject),
                 'email': booking.email,
                 'phone': booking.phone_number,
                 'time': str(booking.preferred_time),
                 'claimed_by': booking.claimed_by.username if booking.claimed_by else None,
+                'is_past': is_past,
             }
         })
     

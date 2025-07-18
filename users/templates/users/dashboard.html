@@ -70,6 +70,14 @@
       </style>
       
     <h3 class="fw-bold text-primary mb-4">📆 Your Calendar View</h3>
+
+    <div class="form-check form-switch mb-3">
+      <input class="form-check-input" type="checkbox" id="togglePastEvents" checked>
+      <label class="form-check-label text-primary fw-semibold" for="togglePastEvents">
+        Show Past Bookings
+      </label>
+    </div>
+    
     <div id="calendar"></div>
   </div>
   
@@ -138,6 +146,27 @@
     });
   
     calendar.render();
+
+    const toggle = document.getElementById('togglePastEvents');
+
+    toggle.addEventListener('change', function () {
+    const showPast = toggle.checked;
+
+    const allEvents = calendar.getEvents();
+
+    allEvents.forEach(event => {
+      const isPast = event.extendedProps.is_past;
+      const shouldShow = showPast || !isPast;
+
+      if (shouldShow) {
+        event.setProp('display', 'auto');  // Show event
+    } else {
+        event.setProp('display', 'none');  // Hide event
+    }
+  });
+});
+
+    
   });
   </script>
 
