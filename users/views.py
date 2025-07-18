@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -136,3 +136,7 @@ def teacher_calendar_events(request):
     
 
     return JsonResponse(events, safe=False)
+
+def public_teacher_profile(request, slug):
+    teacher = get_object_or_404(TeacherProfile, slug=slug)
+    return render(request, 'users/teacher_profile.html', {'teacher': teacher})

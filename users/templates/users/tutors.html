@@ -37,6 +37,14 @@
                                 No subject assigned
                             {% endfor %}
                         </p>
+                        <div class="text-center mt-2">
+                            {% if tutor.slug %}
+                                <a href="{% url 'teacher_profile' slug=tutor.slug %}" class="btn btn-sm btn-outline-primary">View Profile</a>
+                            {% else %}
+                                <span class="text-muted">Profile coming soon</span>
+                            {% endif %}
+                        </div>
+                        
                     </div>
                 </div>
             </div>

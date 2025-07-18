@@ -1,6 +1,6 @@
 from django.urls import path
 from django.contrib.auth.views import LogoutView
-from .views import teacher_login, teacher_dashboard, claim_booking, tutor_list, teacher_calendar_events
+from .views import teacher_login, teacher_dashboard, claim_booking, tutor_list, teacher_calendar_events, public_teacher_profile
 
 
 urlpatterns = [
@@ -9,5 +9,6 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(next_page='teacher_login'), name='logout'),
     path('claim/<int:booking_id>/', claim_booking, name='claim_booking'),
     path('tutors/', tutor_list, name='tutors'),
-    path('calendar/events/', teacher_calendar_events, name='calendar_events')
+    path('calendar/events/', teacher_calendar_events, name='calendar_events'),
+    path('teachers/<slug:slug>/', public_teacher_profile, name='teacher_profile'),
 ]
