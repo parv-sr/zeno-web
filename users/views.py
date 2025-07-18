@@ -7,6 +7,7 @@ from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404, redirect
 from .models import TeacherProfile
 from bookings.models import Subject
+from django.http import JsonResponse
 
 def teacher_login(request):
     if request.method == 'POST':
@@ -71,7 +72,7 @@ def tutor_list(request):
     subjects = Subject.objects.all()
 
     if subject_id:
-        tutors = TeacherProfile.objects.filter(subject__id=subject_id)
+        tutors = TeacherProfile.objects.filter(subjects__id=subject_id)
     else:
         tutors = TeacherProfile.objects.all()
 
@@ -80,3 +81,30 @@ def tutor_list(request):
         'subjects': subjects,
         'selected_subject': int(subject_id) if subject_id else None,
     })
+
+
+@login_required
+def teacher_calendar_events(request):
+    teacher_subjects = request.user.teacherprofile.subjects.all()
+
+    events = []
+    bookings = Booking.objects.filter(subject__in=teacher_subjects)
+
+    for booking in bookings:
+        events.append({
+            'id': booking.id,
+            'title': f"{booking.full_name}",
+            'start': str(booking.preferred_date),
+            'backgroundColor': '#6194E8' if booking.claimed_by else '#03BBD0',
+            'borderColor': '#03BBD0' if not booking.claimed_by else '#6194E8',
+            'extendedProps': {
+                'subject': str(booking.subject),
+                'email': booking.email,
+                'phone': booking.phone_number,
+                'time': str(booking.preferred_time),
+                'claimed_by': booking.claimed_by.username if booking.claimed_by else None,
+            }
+        })
+    
+
+    return JsonResponse(events, safe=False)
