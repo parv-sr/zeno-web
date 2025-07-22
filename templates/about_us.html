@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="text-center fw-bold text-primary mb-4">About Us</h2>
+    <p class="lead text-center text-muted mb-5">
+        At Zeno, we are committed to making quality tutoring accessible to every learner. 
+        Our mission is to connect passionate tutors with students across subjects and grade levels, 
+        all through a seamless and intuitive platform.
+    </p>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="bg-light rounded p-4 shadow-sm h-100">
+                <h5 class="fw-bold text-primary">Our Vision</h5>
+                <p class="text-muted">To redefine education by empowering learners and educators with the tools and support they need to succeed.</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <!-- Subjects We Offer -->
+            <div class="container my-5">
+                <h2 class="text-center fw-bold text-primary mb-4">Subjects We Offer</h2>
+              
+                <div class="row justify-content-center">
+                  <div class="col-md-8">
+                    <div class="list-group shadow-sm rounded overflow-hidden">
+                      {% for subject in subjects %}
+                        <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-3">
+                          <span class="fw-semibold text-dark">{{ subject.name }}</span>
+                          <span class="badge rounded-pill bg-info text-white">Available</span>
+                        </div>
+                      {% empty %}
+                        <div class="list-group-item text-center text-muted">No subjects available at the moment.</div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+  
+        </div>
+    </div>
+
+    <div class="text-center mt-5">
+        <a href="{% url 'home' %}" class="btn btn-outline-primary">Back to Home</a>
+    </div>
+</div>
+
+<style>
+    .list-group-item:hover {
+      background-color: #f0fdff;
+      transition: background-color 0.3s ease;
+    }
+  
+    .bg-info {
+      background-color: #00c6dc !important;
+    }
+  </style>
+  
+
+{% endblock %}
