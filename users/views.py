@@ -106,11 +106,21 @@ SUBJECT_COLOR_MAP = {
 
 @login_required
 def teacher_calendar_events(request):
+    try:
+        profile = request.user.teacherprofile
+    except TeacherProfile.DoesNotExist:
+        return JsonResponse([], safe=False)
+        
+
     teacher_subjects = request.user.teacherprofile.subjects.all()
 
     today = date.today()
     events = []
-    bookings = Booking.objects.filter(subject__in=teacher_subjects)
+    bookings = Booking.objects.filter(
+        subject__in=teacher_subjects,
+        claimed_by = request.user,
+        )
+    
 
     for booking in bookings:
         is_past = booking.preferred_date < today
